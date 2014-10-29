@@ -8,7 +8,8 @@ class Ckeditor::PicturesController < Ckeditor::ApplicationController
   end
 
   def create
-    @picture = Ckeditor.picture_model.new
+    folder_hash = session[:folder_id].present? ? {_folder_id: session[:folder_id]} : {}
+    @picture = Ckeditor.picture_model.new({}.merge(folder_hash))
     respond_with_asset(@picture)
   end
 

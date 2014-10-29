@@ -1,0 +1,59 @@
+$folders-sidebar-width: 250px
+$min-height-setting: 1000px
+
+body.folders
+  a
+    text-decoration: none !important
+    color: #0094CC
+  .sidebar
+    background-color: darken(white, 5)
+    border-right: 2px solid #ccc
+    float: left
+    min-height: $min-height-setting
+    overflow-x: scroll
+    width: $folders-sidebar-width
+  ul.folders
+    list-style: none
+    padding: 0px 20px
+    margin-top: 0px
+    &.depth-1
+      padding: 5px 10px
+  .folder-row
+    display: block
+    .expand, .collapse
+      font-size: 20px
+      display: inline
+  li.folder
+    display: inline
+    font-size: 14px
+    padding-top: 3px
+    &.active > a
+      color: black
+      cursor: default
+      font-weight: bold
+      pointer-events: none
+    &.depth-1
+      margin-top: 5px
+    font-weight: normal
+  .content-area
+    border-right: thin solid #ccc
+    min-height: $min-height-setting
+    left: $folders-sidebar-width
+    position: absolute
+    width: 1100px - $folders-sidebar-width
+  .title-area
+    border-bottom: thin solid #ccc
+    display: block
+    padding: 10px 20px
+    .title
+      display: inline
+      font-size: 1.5em
+      font-weight: bold
+    .new-folder
+      display: inline
+      margin-left: 20px
+  .upload-area
+    padding: 0px 20px 20px
+  .gal-holder
+    padding-left: 0px
+    padding-right: 0px
