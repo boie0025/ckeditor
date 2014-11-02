@@ -11,6 +11,33 @@ $.QueryString = (function(a) {
 })(window.location.search.substr(1).split('&'))
 
 $(document).ready(function(){
+
+  function closeIframe($iframe) {
+    $iframe.hide();
+    $("#add-to-album").show();
+    $("#cancel-add-to-album").hide();
+  }
+
+  function openIframe($iframe) {
+    $iframe.show();
+    $("#cancel-add-to-album").show();
+    $("#add-to-album").hide();
+  }
+
+  $("#add-to-album").on('click',function(e){
+    e.preventDefault();
+    openIframe($("#folders-iframe"));
+  });
+
+  $("#cancel-add-to-album").on('click',function(e){
+    e.preventDefault();
+    closeIframe($("#folders-iframe"));
+  });
+
+  function addToAlbum(content_asset_id) {
+    console.log(content_asset_id);
+  };
+
   $("div.gal-item div.gal-inner-holder")
     .live('mouseover', function(e){
       $(this).addClass('hover');
@@ -19,15 +46,27 @@ $(document).ready(function(){
       $(this).removeClass('hover');
     })
     .live('click', function(e){
-      var url = $(this).parents('div.gal-item').data('url');
-      CKEDITOR.tools.callFunction(CKEditorFuncNum, url);
-      window.close();
+      var input = parent.document.getElementById("content_asset_id");
+      if (input) {
+        var $input = $(input);
+        var content_asset_id = $(this).data('id');
+        $input.val(content_asset_id);
+        var $iframe = $(parent.document.getElementById("folders-iframe"));
+        var $add_to_album = $(parent.document.getElementById("add-to-album"))
+        var $cancel_add_to_album = $(parent.document.getElementById("cancel-add-to-album"))
+        $iframe.hide();
+        $add_to_album.show();
+        $cancel_add_to_album.hide();
+        $(parent.document.getElementById("add-content-asset")).trigger('submit');
+      } else {
+        var url = $(this).parents('div.gal-item').data('url');
+        CKEDITOR.tools.callFunction(CKEditorFuncNum, url);
+        window.close();
+      };
     });
 
-  console.log('hello again')
   $('.insert-public-resource').on('click', function(e){
     e.preventDefault();
-    console.log("hello");
     var url = $(this).data('url');
     CKEDITOR.tools.callFunction(CKEditorFuncNum, url);
     window.close();

@@ -17,20 +17,22 @@
 
   <script type="text/javascript">
     var CKEditorFuncNum = "<%= session[:CKEditorFuncNum] %>";
-    console.log(CKEditorFuncNum);
     var CKEditorName = "<%= session[:CKEditor] %>";
-    console.log(CKEditorName);
     var CKEDITOR = window.opener.CKEDITOR;
     var EDITOR = CKEDITOR.instances[CKEditorName];
   </script>
+
 </head>
-<body class="folders">
-  <%= render 'sidebar' %>
+<body class="ckeditor">
+  <%= yield(:sidebar) %>
   <div class="content-area">
     <div class="title-area">
       <%= yield(:title) %>
     </div>
     <div class="upload-area">
+      <div class="notice-area">
+        <%= yield(:notices) %>
+      </div>
       <%= yield %>
     </div>
     <%= render :partial => 'ckeditor/shared/asset_tmpl' %>

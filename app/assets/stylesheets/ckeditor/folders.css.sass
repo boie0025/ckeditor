@@ -1,7 +1,16 @@
-$folders-sidebar-width: 250px
+$ck-sidebar-width: 250px
 $min-height-setting: 1000px
 
-body.folders
+.fileupload-file
+  img
+    width: 100%
+
+#folders-iframe
+  float: left
+  margin-top: 5px
+  display: none
+
+body.ckeditor
   a
     text-decoration: none !important
     color: #0094CC
@@ -11,19 +20,21 @@ body.folders
     float: left
     min-height: $min-height-setting
     overflow-x: scroll
-    width: $folders-sidebar-width
-  ul.folders
+    width: $ck-sidebar-width
+  ul.folders, ul.albums
     list-style: none
     padding: 0px 20px
     margin-top: 0px
-    &.depth-1
+    &.depth-0
       padding: 5px 10px
-  .folder-row
+  .folder-row, .album-row
     display: block
     .expand, .collapse
       font-size: 20px
       display: inline
-  li.folder
+  .album-row.new
+    margin-bottom: 10px
+  .folder, .album
     display: inline
     font-size: 14px
     padding-top: 3px
@@ -32,14 +43,14 @@ body.folders
       cursor: default
       font-weight: bold
       pointer-events: none
-    &.depth-1
+    &.depth-0
       margin-top: 5px
     font-weight: normal
   .content-area
     min-height: $min-height-setting
-    left: $folders-sidebar-width
+    left: $ck-sidebar-width
     position: absolute
-    width: 1100px - $folders-sidebar-width
+    width: 1100px - $ck-sidebar-width
   .title-area
     display: block
     padding: 10px 20px
@@ -47,7 +58,7 @@ body.folders
       display: inline
       font-size: 1.5em
       font-weight: bold
-    .folder-action
+    .folder-action, .album-action
       display: inline
       margin-left: 20px
   .upload-area
@@ -55,3 +66,24 @@ body.folders
   .gal-holder
     padding-left: 0px
     padding-right: 0px
+  .photos
+    list-style: none
+    padding-left: 0px
+    .photo
+      padding-left: 10px
+      &:first-child, &:nth-child(6n + 6)
+        padding-left: 0px
+      float: left
+      width: 150px
+      height: 200px
+      margin-top: 20px
+      img
+        max-width: 150px
+        max-height: 150px
+  .filename
+    font-size: 10px
+    color: #888
+  .remove
+    font-size: 10px
+    margin-top: 3px
+    font-weight: bold

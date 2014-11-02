@@ -7,7 +7,7 @@
           :data => {:confirm => t('ckeditor.confirm_delete')},
           :class => "fileupload-cancel gal-del" %>
 
-	<div class="fileupload-file gal-inner-holder">
+	<div class="fileupload-file gal-inner-holder" data-id="<%= asset.id %>">
 		<div class="img"><%= image_tag(asset.url, :title => asset.filename) %></div>
 		<div class="img-data">
 			<div class="img-name"><%= asset.filename %></div>
