@@ -16,9 +16,9 @@
   <% end -%>
 
   <script type="text/javascript">
-    var CKEditorFuncNum = "<%= session[:CKEditorFuncNum] %>";
-    var CKEditorName = "<%= session[:CKEditor] %>";
-    var CKEDITOR = window.opener.CKEDITOR;
+    var CKEditorFuncNum = "<%= session[:CKEditorFuncNum] || params[:CKEditorFuncNum] %>";
+    var CKEditorName = "<%= session[:CKEditor] || params[:CKEditor] %>";
+    var CKEDITOR = parent.opener.CKEDITOR;
     var EDITOR = CKEDITOR.instances[CKEditorName];
   </script>
 

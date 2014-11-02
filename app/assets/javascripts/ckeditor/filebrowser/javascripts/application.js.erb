@@ -34,6 +34,21 @@ $(document).ready(function(){
     closeIframe($("#folders-iframe"));
   });
 
+  $("#js-insert-to-widget").on('click',function(e){
+    e.preventDefault();
+
+    var album_field_id = $(this).data('album-field-id');
+    var album_id = $(this).data('album-id');
+    var album_name = $(this).data('album-name');
+    var $album = $(window.opener.document.getElementById(album_field_id));
+    var $prior_option = $album.find("option[value='" + album_id + "']")
+    if ($prior_option.length == 0) {
+      $album.append($("<option></option>").attr("value", album_id).text(album_name));
+    }
+    $album.val(album_id);
+    window.close();
+  });
+
   function addToAlbum(content_asset_id) {
     console.log(content_asset_id);
   };

@@ -9,7 +9,7 @@ class Ckeditor::ApplicationController < ApplicationController
   protected
 
     def respond_with_asset(asset)
-      file = params[:CKEditor].blank? ? params[:qqfile] : params[:upload]
+      file = params[:qqfile] || params[:upload]
       asset.data = Ckeditor::Http.normalize_param(file, request)
 
       callback = ckeditor_before_create_asset(asset)
@@ -23,7 +23,7 @@ class Ckeditor::ApplicationController < ApplicationController
       else
         if params[:CKEditor]
           render :text => %Q"<script type='text/javascript'>
-              window.parent.CKEDITOR.tools.callFunction(#{params[:CKEditorFuncNum]}, null, '#{asset.errors.full_messages.first}');
+              parent.CKEDITOR.tools.callFunction(#{params[:CKEditorFuncNum]}, null, '#{asset.errors.full_messages.first}');
             </script>"
         else
           render :nothing => true
