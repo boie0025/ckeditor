@@ -37,8 +37,8 @@ $(document).ready(function(){
   $("#js-insert-to-widget").on('click',function(e){
     e.preventDefault();
 
-    var album_field_id = $(this).data('album-field-id');
-    var album_id = $(this).data('album-id');
+    var field_id = $(this).data('field-id');
+    var model_id = $(this).data('model-id');
     var album_name = $(this).data('album-name');
     var $album = $(window.opener.document.getElementById(album_field_id));
     var $prior_option = $album.find("option[value='" + album_id + "']")
