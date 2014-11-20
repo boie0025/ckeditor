@@ -12,6 +12,17 @@ $.QueryString = (function(a) {
 
 $(document).ready(function(){
 
+  console.log("hello");
+  $("form.resource_form #public_resource_format_type").on("change", function(){
+    var $fields = $(".intranet_resource_field_area");
+    $fields.find("input").prop('disabled', true);
+    $fields.hide();
+    var val = $(this).val();
+    var id = "#intranet_resource_" + val + "_area";
+    $(id).show();
+    $(id).find("input").prop("disabled", false);
+  });
+
   function closeIframe($iframe) {
     $iframe.hide();
     $("#add-to-album").show();
