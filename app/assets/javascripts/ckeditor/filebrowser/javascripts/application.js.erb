@@ -12,7 +12,6 @@ $.QueryString = (function(a) {
 
 $(document).ready(function(){
 
-  console.log("hello");
   $("form.resource_form #public_resource_format_type").on("change", function(){
     var $fields = $(".intranet_resource_field_area");
     $fields.find("input").prop('disabled', true);
