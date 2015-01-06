@@ -59,10 +59,6 @@ $(document).ready(function(){
     window.close();
   });
 
-  function addToAlbum(content_asset_id) {
-    console.log(content_asset_id);
-  };
-
   $("div.gal-item div.gal-inner-holder")
     .live('mouseover', function(e){
       $(this).addClass('hover');
@@ -73,6 +69,7 @@ $(document).ready(function(){
     .live('click', function(e){
       var input = parent.document.getElementById("content_asset_id");
       if (input) {
+        // ALBUM WIDGET
         var $input = $(input);
         var content_asset_id = $(this).data('id');
         $input.val(content_asset_id);
@@ -83,7 +80,26 @@ $(document).ready(function(){
         $add_to_album.show();
         $cancel_add_to_album.hide();
         $(parent.document.getElementById("add-content-asset")).trigger('submit');
+      } else if (EDITABLE_FILE_ID.length > 0) {
+      // EDITABLE ELEMENTS
+        // EDITABLE ELEMENT ON LOCOMOTIVE BACKOFFICE
+        var url_input = $(opener.document.getElementById(EDITABLE_FILE_ID + "_source"));
+        var filename_input = $(opener.document.getElementById(EDITABLE_FILE_ID + "_filename"));
+        var link_field = $(opener.document.getElementById(EDITABLE_FILE_ID + "_link"));
+
+        // CKEDITOR CHOSEN IMAGE FIELDS
+        var path = $(this).parents('div.gal-item').data('url');
+        var filename = $(this).parents('div.gal-item').data('filename');
+
+        // UPDATE EDITABLE ELEMENT
+        url_input.val("http://" + FULL_URL + path);
+        filename_input.val(filename);
+        link_field.attr('href', path);
+        link_field.text(filename);
+        link_field.show();
+        window.close();
       } else {
+        // DEFAULT CKEDITOR BEHAVIOR
         var url = $(this).parents('div.gal-item').data('url');
         CKEDITOR.tools.callFunction(CKEditorFuncNum, url);
         window.close();
