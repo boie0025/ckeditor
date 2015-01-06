@@ -2,7 +2,7 @@
 <div id="asset_${id}" class="gal-item" data-url="${url}" data-filename="${filename}">
   <%= link_to image_tag('ckeditor/filebrowser/images/gal_del.png',
     :title => I18n.t('ckeditor.buttons.delete')),
-          "/ckeditor/${controller}/${id}.json",
+          "/ckeditor/pictures/${id}.json",
           :remote => true,
           :method => :delete,
           :data => {:confirm => t('ckeditor.confirm_delete')},
