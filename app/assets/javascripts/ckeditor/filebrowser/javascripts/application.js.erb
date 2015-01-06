@@ -18,7 +18,6 @@ $(document).ready(function(){
     $fields.hide();
     var val = $(this).val();
     var id = "#portal_resource_" + val + "_area";
-    console.log(val);
     $(id).show();
     $(id).find("input").prop("disabled", false);
   });
@@ -59,10 +58,6 @@ $(document).ready(function(){
     $album.val(album_id);
     window.close();
   });
-
-  function addToAlbum(content_asset_id) {
-    console.log(content_asset_id);
-  };
 
   $("div.gal-item div.gal-inner-holder")
     .live('mouseover', function(e){
@@ -106,7 +101,6 @@ $(document).ready(function(){
       } else {
         // DEFAULT CKEDITOR BEHAVIOR
         var url = $(this).parents('div.gal-item').data('url');
-        console.log(url);
         CKEDITOR.tools.callFunction(CKEditorFuncNum, url);
         window.close();
       };
