@@ -88,13 +88,17 @@ $(document).ready(function(){
         var link_field = $(opener.document.getElementById(EDITABLE_FILE_ID + "_link"));
 
         // CKEDITOR CHOSEN IMAGE FIELDS
-        var path = $(this).parents('div.gal-item').data('url');
+        var url = $(this).parents('div.gal-item').data('url');
+        if (url.substring(0, 4) != "http") {
+          var url = "http://" + FULL_URL + url
+        };
         var filename = $(this).parents('div.gal-item').data('filename');
 
         // UPDATE EDITABLE ELEMENT
-        url_input.val("http://" + FULL_URL + path);
+
+        url_input.val(url);
         filename_input.val(filename);
-        link_field.attr('href', path);
+        link_field.attr('href', url);
         link_field.text(filename);
         link_field.show();
         window.close();
