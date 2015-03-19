@@ -59,6 +59,14 @@ $(document).ready(function(){
     window.close();
   });
 
+  function parseImageUrl(url) {
+    if (url.substring(0, 4) != "http") {
+      return "http://" + FULL_URL + url
+    } else {
+      return url
+    };
+  }
+
   $("div.gal-item div.gal-inner-holder")
     .live('mouseover', function(e){
       $(this).addClass('hover');
@@ -68,6 +76,8 @@ $(document).ready(function(){
     })
     .live('click', function(e){
       var input = parent.document.getElementById("content_asset_id");
+      var url = $(this).parents('div.gal-item').data('url');
+      var filename = $(this).parents('div.gal-item').data('filename');
       if (input) {
         // ALBUM WIDGET
         var $input = $(input);
@@ -88,11 +98,7 @@ $(document).ready(function(){
         var link_field = $(opener.document.getElementById(EDITABLE_FILE_ID + "_link"));
 
         // CKEDITOR CHOSEN IMAGE FIELDS
-        var url = $(this).parents('div.gal-item').data('url');
-        if (url.substring(0, 4) != "http") {
-          var url = "http://" + FULL_URL + url
-        };
-        var filename = $(this).parents('div.gal-item').data('filename');
+        var url = parseImageUrl(url);
 
         // UPDATE EDITABLE ELEMENT
 
@@ -102,9 +108,31 @@ $(document).ready(function(){
         link_field.text(filename);
         link_field.show();
         window.close();
+      } else if (CONTENT_ENTRY_ID.length > 0){
+      // CONTENT ENTRY FORM
+        // CONTENT ENTRY ON LOCOMOTIVE BACKOFFICE
+
+        var $input_list_item = $(opener.document.getElementById(CONTENT_ENTRY_ID));
+        var $url_input = $input_list_item.find("input");
+        var $view_link = $input_list_item.find(".image-filename")
+        var $view_link_area = $input_list_item.find(".image-filename-area")
+
+        var url = parseImageUrl(url);
+        $url_input.val(url);
+        $url_input.text(url);
+        $url_input.trigger("change");
+
+        $view_link.attr("href", url);
+        $view_link.text(filename);
+        $view_link_area.show();
+
+        // SHOW VIEW LINK
+
+
+        window.close();
+
       } else {
         // DEFAULT CKEDITOR BEHAVIOR
-        var url = $(this).parents('div.gal-item').data('url');
         CKEDITOR.tools.callFunction(CKEditorFuncNum, url);
         window.close();
       };
@@ -118,6 +146,7 @@ $(document).ready(function(){
   });
 
   $("div.gal-item a.gal-del").live('ajax:complete', function(xhr, status){
+    console.log("completed ajax and about to delete picture");
     $(this).parents('div.gal-item').remove();
   });
 
