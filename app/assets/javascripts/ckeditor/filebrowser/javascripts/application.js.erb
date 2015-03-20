@@ -146,7 +146,6 @@ $(document).ready(function(){
   });
 
   $("div.gal-item a.gal-del").live('ajax:complete', function(xhr, status){
-    console.log("completed ajax and about to delete picture");
     $(this).parents('div.gal-item').remove();
   });
 
