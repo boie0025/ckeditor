@@ -41,11 +41,6 @@ body.ckeditor
     display: inline
     font-size: 14px
     padding-top: 3px
-    &.active > a
-      color: black
-      cursor: default
-      font-weight: bold
-      pointer-events: none
     &.depth-0
       margin-top: 5px
     font-weight: normal
@@ -91,13 +86,25 @@ body.ckeditor
     margin-top: 3px
     font-weight: bold
   .pagination-area
-    display: block
+    display: inline-block
+    float: right
+    padding-top: 20px
     clear: both
   .pagination-link
     font-weight: bold
-    margin-top: 20px
-  .next
+  .prev, .next, .paginated-numbers
     float: right
+  .next
     margin-right: 10px
-  .prev
-    float: left
+  .paginated-numbers
+    display: inline-block
+    margin: 0 20px
+    padding: 0
+  .paginated-number
+    display: inline
+    padding: 0px 3px
+  .active > a
+    color: black
+    cursor: default
+    font-weight: bold
+    pointer-events: none

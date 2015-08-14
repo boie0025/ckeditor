@@ -64,7 +64,7 @@ module Ckeditor
 
   # Paginate assets
   mattr_accessor :default_per_page
-  @@default_per_page = 24
+  @@default_per_page = 14
 
   # Asset restrictions
   mattr_accessor :assets_languages

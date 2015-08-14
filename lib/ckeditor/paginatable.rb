@@ -1,11 +1,12 @@
 module Ckeditor
   # Simple paginate relation
   class Paginatable
-    attr_reader :limit_value, :offset_value
+    attr_reader :limit_value, :offset_value, :window
 
     def initialize(scope, options = {})
       @scope = scope
       @limit_value = (options[:limit] || Ckeditor.default_per_page).to_i
+      @window = 8
     end
 
     def page(num = 1)
@@ -51,6 +52,34 @@ module Ckeditor
     def current_page
       offset = (offset_value < 0 ? 0 : offset_value)
       (offset / limit_value) + 1
+    end
+
+    def number_preceeding_pages
+      @number_preceeding_pages ||= current_page - 1
+    end
+
+    def number_following_pages
+      @number_following_pages ||= total_pages - current_page
+    end
+
+    def exceeds_preceding_pages_window?
+      number_preceeding_pages > window
+    end
+
+    def exceeds_following_pages_window?
+      number_following_pages > window
+    end
+
+    def start_page
+      exceeds_preceding_pages_window? ? current_page - window : 1
+    end
+
+    def end_page
+      exceeds_following_pages_window? ? current_page + window : total_pages
+    end
+
+    def page_numbers
+      (start_page..end_page).to_a
     end
   end
 end
