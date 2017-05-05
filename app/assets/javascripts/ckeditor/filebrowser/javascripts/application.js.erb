@@ -22,6 +22,24 @@ $(document).ready(function(){
     $(id).find("input").prop("disabled", false);
   });
 
+  // based on code from https://stackoverflow.com/questions/1960240/jquery-ajax-submit-form
+  function setupSubmitFormAjax($form, $target) {
+    $form.submit(function(e) {
+      var url = $form.attr('action'); // the script where you handle the form input.
+
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: $form.serialize(), // serializes the form's elements.
+        success: function(data)
+        {
+           $target.html(data);
+        }
+      });
+      e.preventDefault(); // avoid to execute the actual submit of the form.
+    });
+  }
+
   function closeIframe($iframe) {
     $iframe.hide();
     $("#add-to-album").show();
@@ -86,10 +104,15 @@ $(document).ready(function(){
         var $iframe = $(parent.document.getElementById("folders-iframe"));
         var $add_to_album = $(parent.document.getElementById("add-to-album"))
         var $cancel_add_to_album = $(parent.document.getElementById("cancel-add-to-album"))
-        $iframe.hide();
-        $add_to_album.show();
-        $cancel_add_to_album.hide();
-        $(parent.document.getElementById("add-content-asset")).trigger('submit');
+        // commented - don't close the stupid iframe, allow continued adding.
+        // $iframe.hide();
+        // $add_to_album.show();
+        // $cancel_add_to_album.hide();
+
+        var $form = $(parent.document.getElementById("add-content-asset"));
+        var $target = $(parent.document.getElementById("current-album-contents"));
+        setupSubmitFormAjax($form, $target);
+        $form.submit();
       } else if (EDITABLE_FILE_ID.length > 0) {
       // EDITABLE ELEMENTS
         // EDITABLE ELEMENT ON LOCOMOTIVE BACKOFFICE

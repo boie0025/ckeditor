@@ -11,6 +11,12 @@ $min-height-setting: 1000px
   display: none
 
 body.ckeditor
+  .clearfix:after
+    content: " "  
+    visibility: hidden
+    display: block
+    height: 0
+    clear: both
   a
     text-decoration: none !important
     color: #0094CC

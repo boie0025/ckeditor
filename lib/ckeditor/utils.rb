@@ -94,7 +94,7 @@ module Ckeditor
           files += Dir[path.join('**', extensions)]
         end
 
-        files.inject([]) do |items, name| 
+        files.inject([]) do |items, name|
           file = Pathname.new(name)
           base = file.basename('.*').to_s
 
